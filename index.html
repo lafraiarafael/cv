@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rafael Lafraia | IT Support Professional in the Netherlands</title>
-  <meta name="description" content="Professional profile of Rafael Lafraia, IT Support professional based in the Netherlands, with an integrated page to paste job descriptions and generate a tailored CV PDF." />
+  <meta name="description" content="Professional profile of Rafael Lafraia, IT Support professional based in the Netherlands, with a smarter job tailoring page and optional GPT integration." />
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
   <style>
     :root {
@@ -18,9 +18,8 @@
       --line: rgba(255,255,255,0.1);
       --shadow: 0 12px 30px rgba(0,0,0,0.28);
       --radius: 18px;
-      --max: 1180px;
+      --max: 1200px;
     }
-
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
@@ -50,9 +49,7 @@
     .menu { display: flex; gap: 18px; flex-wrap: wrap; }
     .menu a { color: var(--muted); font-size: 0.95rem; }
     .hero { padding: 72px 0 42px; }
-    .hero-grid {
-      display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 28px; align-items: stretch;
-    }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 28px; align-items: stretch; }
     .hero-card, .side-card, .section-card {
       background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
       border: 1px solid var(--line);
@@ -76,9 +73,7 @@
     .btn.primary { background: linear-gradient(90deg, var(--accent), #90b7ff); color: #081120; border: none; }
     .btn.secondary { background: rgba(255,255,255,0.04); }
     .side-card { padding: 28px; display: grid; gap: 18px; }
-    .info-block h3 {
-      margin: 0 0 8px; font-size: 0.95rem; color: var(--accent-2); text-transform: uppercase; letter-spacing: 1px;
-    }
+    .info-block h3 { margin: 0 0 8px; font-size: 0.95rem; color: var(--accent-2); text-transform: uppercase; letter-spacing: 1px; }
     .info-block p, .info-block li { margin: 0; color: var(--muted); }
     .info-block ul { margin: 0; padding-left: 18px; }
     .sections { display: grid; gap: 24px; padding: 8px 0 64px; }
@@ -99,26 +94,29 @@
     .list-clean { margin: 0; padding-left: 18px; color: var(--muted); }
     .footer { padding: 28px 0 50px; color: var(--muted); text-align: center; }
     .tool-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px; }
-    .textarea-wrap { display: grid; gap: 12px; }
-    textarea {
-      width: 100%; min-height: 380px; resize: vertical; border-radius: 16px; padding: 18px;
-      background: rgba(255,255,255,0.03); color: var(--text); border: 1px solid var(--line);
-      font: inherit;
+    .textarea-wrap, .input-wrap { display: grid; gap: 12px; }
+    textarea, input {
+      width: 100%; border-radius: 16px; padding: 18px;
+      background: rgba(255,255,255,0.03); color: var(--text); border: 1px solid var(--line); font: inherit;
     }
+    textarea { min-height: 380px; resize: vertical; }
     .muted { color: var(--muted); }
     .counter { font-size: 0.9rem; color: var(--muted); text-align: right; }
     .warning { color: var(--danger); }
-    .preview-box {
+    .preview-box, .analysis-box {
       border: 1px solid var(--line); border-radius: 16px; padding: 18px; background: rgba(255,255,255,0.03);
-      min-height: 380px; white-space: pre-wrap;
+      white-space: pre-wrap;
     }
+    .preview-box { min-height: 420px; }
+    .analysis-box { min-height: 220px; margin-bottom: 16px; }
     .status {
       margin-top: 10px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px;
       background: rgba(255,255,255,0.03); color: var(--muted);
     }
     .small-note { font-size: 0.92rem; color: var(--muted); }
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     @media (max-width: 900px) {
-      .hero-grid, .grid-2, .tool-grid { grid-template-columns: 1fr; }
+      .hero-grid, .grid-2, .tool-grid, .row-2 { grid-template-columns: 1fr; }
       .hero { padding-top: 40px; }
     }
   </style>
@@ -142,21 +140,13 @@
       <div class="hero-card">
         <div class="eyebrow">Based in Zaandam, Netherlands</div>
         <h1>IT Support Professional focused on reliable end-user support and daily IT operations.</h1>
-        <p class="subtitle">
-          I am an IT support professional with experience in end-user support, systems troubleshooting,
-          workstation setup, onboarding, Microsoft 365, Active Directory, hardware and software support,
-          and process-oriented operations in fast-paced environments.
-        </p>
-        <p class="subtitle">
-          I bring a practical, solution-oriented mindset, clear communication with users, and strong operational
-          discipline to help teams stay productive and supported.
-        </p>
+        <p class="subtitle">I am an IT support professional with experience in end-user support, systems troubleshooting, workstation setup, onboarding, Microsoft 365, Active Directory, hardware and software support, and process-oriented operations in fast-paced environments.</p>
+        <p class="subtitle">I bring a practical, solution-oriented mindset, clear communication with users, and strong operational discipline to help teams stay productive and supported.</p>
         <div class="hero-actions">
           <a class="btn primary" href="#colar-vaga">Tailor CV for a Job</a>
           <a class="btn secondary" href="#experience">View experience</a>
         </div>
       </div>
-
       <aside class="side-card">
         <div class="info-block">
           <h3>Current Goal</h3>
@@ -195,80 +185,34 @@
     <section id="experience" class="section-card">
       <h2 class="section-title">Professional Experience</h2>
       <div class="timeline">
-        <article class="job">
-          <h3>Operations Manager</h3>
-          <div class="meta">2018 – 2026 | Brazil / Netherlands</div>
-          <ul>
-            <li>Led operations in fast-paced environments, ensuring continuity, performance, and quick resolution of operational and system-related issues.</li>
-            <li>Managed team operations, logistics, and workflow execution for international trade fairs across Asia, Europe, the Middle East, and Brazil.</li>
-            <li>Managed the full kitchen operation of a large restaurant in Amsterdam for one year, overseeing team performance, workflows, and service execution.</li>
-            <li>Worked extensively with ERP systems, POS platforms, and spreadsheets for inventory, orders, and operational workflows.</li>
-            <li>Acted as the first point of contact for system and process-related issues, identifying root causes and implementing practical solutions.</li>
-            <li>Led onboarding and training of team members, including system usage and process standardization.</li>
-            <li>Implemented process improvements to increase efficiency, scalability, and operational reliability.</li>
-          </ul>
-        </article>
-        <article class="job">
-          <h3>IT Analyst – Data & Systems | MultiBR Commercial Group</h3>
-          <div class="meta">2015 – 2018</div>
-          <ul>
-            <li>Supported business operations through data analysis, reporting, and system optimization.</li>
-            <li>Developed SQL queries for data extraction and reporting.</li>
-            <li>Built dashboards and reports to support decision-making.</li>
-            <li>Maintained data accuracy and system reliability across platforms.</li>
-            <li>Collaborated with teams to improve workflows and processes.</li>
-          </ul>
-        </article>
-        <article class="job">
-          <h3>Junior IT Support | Fundação Sanepar</h3>
-          <div class="meta">2009 – 2012</div>
-          <ul>
-            <li>Provided end-user support for desktops, servers, and applications.</li>
-            <li>Managed user accounts and access control in Active Directory environments.</li>
-            <li>Performed hardware and software troubleshooting.</li>
-            <li>Supported Citrix virtual environments.</li>
-            <li>Assisted with system deployment and issue resolution.</li>
-          </ul>
-        </article>
-        <article class="job">
-          <h3>IT Trainee | Sanepar – State-Owned Water Company – Brazil</h3>
-          <div class="meta">2008 – 2009</div>
-          <ul>
-            <li>Provided hardware and software support for end users.</li>
-            <li>Installed and maintained desktops and servers.</li>
-            <li>Worked in an enterprise environment with a network of over 2,000 computers across the state.</li>
-          </ul>
-        </article>
+        <article class="job"><h3>Operations Manager</h3><div class="meta">2018 – 2026 | Brazil / Netherlands</div><ul><li>Led operations in fast-paced environments, ensuring continuity, performance, and quick resolution of operational and system-related issues.</li><li>Managed team operations, logistics, and workflow execution for international trade fairs across Asia, Europe, the Middle East, and Brazil.</li><li>Managed the full kitchen operation of a large restaurant in Amsterdam for one year, overseeing team performance, workflows, and service execution.</li><li>Worked extensively with ERP systems, POS platforms, and spreadsheets for inventory, orders, and operational workflows.</li><li>Acted as the first point of contact for system and process-related issues, identifying root causes and implementing practical solutions.</li><li>Led onboarding and training of team members, including system usage and process standardization.</li><li>Implemented process improvements to increase efficiency, scalability, and operational reliability.</li></ul></article>
+        <article class="job"><h3>IT Analyst – Data & Systems | MultiBR Commercial Group</h3><div class="meta">2015 – 2018</div><ul><li>Supported business operations through data analysis, reporting, and system optimization.</li><li>Developed SQL queries for data extraction and reporting.</li><li>Built dashboards and reports to support decision-making.</li><li>Maintained data accuracy and system reliability across platforms.</li><li>Collaborated with teams to improve workflows and processes.</li></ul></article>
+        <article class="job"><h3>Junior IT Support | Fundação Sanepar</h3><div class="meta">2009 – 2012</div><ul><li>Provided end-user support for desktops, servers, and applications.</li><li>Managed user accounts and access control in Active Directory environments.</li><li>Performed hardware and software troubleshooting.</li><li>Supported Citrix virtual environments.</li><li>Assisted with system deployment and issue resolution.</li></ul></article>
+        <article class="job"><h3>IT Trainee | Sanepar – State-Owned Water Company – Brazil</h3><div class="meta">2008 – 2009</div><ul><li>Provided hardware and software support for end users.</li><li>Installed and maintained desktops and servers.</li><li>Worked in an enterprise environment with a network of over 2,000 computers across the state.</li></ul></article>
       </div>
     </section>
 
     <section id="skills" class="section-card">
       <h2 class="section-title">Skills</h2>
       <div class="tags">
-        <span class="tag">Windows Environment</span>
-        <span class="tag">Microsoft 365</span>
-        <span class="tag">Active Directory</span>
-        <span class="tag">User Management</span>
-        <span class="tag">Hardware & Software Troubleshooting</span>
-        <span class="tag">IT Asset Management</span>
-        <span class="tag">Device Setup & Configuration</span>
-        <span class="tag">End-User Support</span>
-        <span class="tag">ERP Systems</span>
-        <span class="tag">POS Systems</span>
-        <span class="tag">SQL & Databases</span>
-        <span class="tag">User Onboarding</span>
-        <span class="tag">Problem Solving</span>
-        <span class="tag">ITIL Mindset</span>
-        <span class="tag">Communication</span>
-        <span class="tag">Team Collaboration</span>
-        <span class="tag">Process Improvement</span>
+        <span class="tag">Windows Environment</span><span class="tag">Microsoft 365</span><span class="tag">Active Directory</span><span class="tag">User Management</span><span class="tag">Hardware & Software Troubleshooting</span><span class="tag">IT Asset Management</span><span class="tag">Device Setup & Configuration</span><span class="tag">End-User Support</span><span class="tag">ERP Systems</span><span class="tag">POS Systems</span><span class="tag">SQL & Databases</span><span class="tag">User Onboarding</span><span class="tag">Problem Solving</span><span class="tag">ITIL Mindset</span><span class="tag">Communication</span><span class="tag">Team Collaboration</span><span class="tag">Process Improvement</span>
       </div>
     </section>
 
     <section id="colar-vaga" class="section-card">
       <h2 class="section-title">Colar Vaga</h2>
-      <p class="lead">Paste any job description below. The page will analyze the vacancy text, adapt your CV wording to the role, and generate a PDF you can download instantly. No database is used.</p>
+      <p class="lead">Paste any job description below. The page now creates a stronger match analysis, a more focused CV, an optional cover letter, and a professional PDF. It can also call GPT through your own API endpoint when you connect one.</p>
       <br />
+      <div class="row-2" style="margin-bottom:16px;">
+        <div class="input-wrap">
+          <label for="apiEndpoint" class="muted">Optional GPT endpoint URL</label>
+          <input id="apiEndpoint" placeholder="https://your-domain.com/api/tailor-cv" />
+        </div>
+        <div class="input-wrap">
+          <label for="targetRole" class="muted">Optional target role</label>
+          <input id="targetRole" placeholder="Example: Servicedeskmedewerker" />
+        </div>
+      </div>
       <div class="tool-grid">
         <div>
           <div class="textarea-wrap">
@@ -277,13 +221,16 @@
             <div id="charCount" class="counter">0 / 20000</div>
           </div>
           <div class="hero-actions">
-            <button id="analyzeBtn" class="btn primary">Interpret Job and Adapt CV</button>
+            <button id="analyzeBtn" class="btn primary">Smart Tailor CV</button>
+            <button id="gptBtn" class="btn secondary">Use GPT Endpoint</button>
             <button id="downloadBtn" class="btn secondary" disabled>Download Tailored PDF</button>
           </div>
           <div id="statusBox" class="status">Waiting for a job description.</div>
-          <p class="small-note">This version runs fully in the browser. It uses rule-based matching on the pasted job text to tailor your CV language and then exports a PDF.</p>
+          <p class="small-note">Without an endpoint, the site uses an improved local tailoring engine. With an endpoint, your own GPT-powered backend can return an even better tailored CV.</p>
         </div>
         <div>
+          <div class="muted" style="margin-bottom:10px;">Match analysis</div>
+          <div id="analysisBox" class="analysis-box">The site will show strengths, gaps, and adaptation notes here.</div>
           <div class="muted" style="margin-bottom:10px;">Tailored CV preview</div>
           <div id="previewBox" class="preview-box">Your tailored CV preview will appear here after analysis.</div>
         </div>
@@ -333,54 +280,32 @@
         'IT support professional with experience in end-user support, systems troubleshooting, workstation setup, onboarding, Microsoft 365, Active Directory, hardware and software support, and workplace operations.',
         'Strong operational background with a hands-on, solution-oriented mindset, clear communication, and focus on reliable day-to-day support.'
       ],
-      skills: [
-        'Windows Environment','Microsoft 365','Active Directory','User Management','Hardware & Software Troubleshooting','IT Asset Management','Device Setup & Configuration','End-User Support','ERP Systems','POS Systems','SQL & Databases','User Onboarding','Problem Solving','ITIL Mindset','Communication','Team Collaboration','Process Improvement'
-      ],
+      skills: ['Windows','Microsoft 365','Active Directory','User Management','Hardware Troubleshooting','Software Troubleshooting','IT Asset Management','Device Setup','End-User Support','ERP Systems','POS Systems','SQL','User Onboarding','Problem Solving','ITIL Mindset','Communication','Team Collaboration','Process Improvement'],
       experience: [
-        {
-          role: 'Operations Manager',
-          meta: '2018 – 2026 | Brazil / Netherlands',
-          bullets: [
-            'Led operations in fast-paced environments, ensuring continuity, performance, and quick resolution of operational and system-related issues.',
-            'Managed team operations, logistics, and workflow execution for international trade fairs across Asia, Europe, the Middle East, and Brazil.',
-            'Managed the full kitchen operation of a large restaurant in Amsterdam for one year, overseeing team performance, workflows, and service execution.',
-            'Worked extensively with ERP systems, POS platforms, and spreadsheets for inventory, orders, and operational workflows.',
-            'Acted as the first point of contact for system and process-related issues, identifying root causes and implementing practical solutions.',
-            'Led onboarding and training of team members, including system usage and process standardization.',
-            'Implemented process improvements to increase efficiency, scalability, and operational reliability.'
-          ]
-        },
-        {
-          role: 'IT Analyst – Data & Systems | MultiBR Commercial Group',
-          meta: '2015 – 2018',
-          bullets: [
-            'Supported business operations through data analysis, reporting, and system optimization.',
-            'Developed SQL queries for data extraction and reporting.',
-            'Built dashboards and reports to support decision-making.',
-            'Maintained data accuracy and system reliability across platforms.',
-            'Collaborated with teams to improve workflows and processes.'
-          ]
-        },
-        {
-          role: 'Junior IT Support | Fundação Sanepar',
-          meta: '2009 – 2012',
-          bullets: [
-            'Provided end-user support for desktops, servers, and applications.',
-            'Managed user accounts and access control in Active Directory environments.',
-            'Performed hardware and software troubleshooting.',
-            'Supported Citrix virtual environments.',
-            'Assisted with system deployment and issue resolution.'
-          ]
-        },
-        {
-          role: 'IT Trainee | Sanepar – State-Owned Water Company – Brazil',
-          meta: '2008 – 2009',
-          bullets: [
-            'Provided hardware and software support for end users.',
-            'Installed and maintained desktops and servers.',
-            'Worked in an enterprise environment with a network of over 2,000 computers across the state.'
-          ]
-        }
+        { role: 'Operations Manager', meta: '2018 – 2026 | Brazil / Netherlands', bullets: [
+          'Led operations in fast-paced environments, ensuring continuity, performance, and quick resolution of operational and system-related issues.',
+          'Managed team operations, logistics, and workflow execution for international trade fairs across Asia, Europe, the Middle East, and Brazil.',
+          'Managed the full kitchen operation of a large restaurant in Amsterdam for one year, overseeing team performance, workflows, and service execution.',
+          'Worked extensively with ERP systems, POS platforms, and spreadsheets for inventory, orders, and operational workflows.',
+          'Acted as the first point of contact for system and process-related issues, identifying root causes and implementing practical solutions.',
+          'Led onboarding and training of team members, including system usage and process standardization.',
+          'Implemented process improvements to increase efficiency, scalability, and operational reliability.' ] },
+        { role: 'IT Analyst – Data & Systems | MultiBR Commercial Group', meta: '2015 – 2018', bullets: [
+          'Supported business operations through data analysis, reporting, and system optimization.',
+          'Developed SQL queries for data extraction and reporting.',
+          'Built dashboards and reports to support decision-making.',
+          'Maintained data accuracy and system reliability across platforms.',
+          'Collaborated with teams to improve workflows and processes.' ] },
+        { role: 'Junior IT Support | Fundação Sanepar', meta: '2009 – 2012', bullets: [
+          'Provided end-user support for desktops, servers, and applications.',
+          'Managed user accounts and access control in Active Directory environments.',
+          'Performed hardware and software troubleshooting.',
+          'Supported Citrix virtual environments.',
+          'Assisted with system deployment and issue resolution.' ] },
+        { role: 'IT Trainee | Sanepar – State-Owned Water Company – Brazil', meta: '2008 – 2009', bullets: [
+          'Provided hardware and software support for end users.',
+          'Installed and maintained desktops and servers.',
+          'Worked in an enterprise environment with a network of over 2,000 computers across the state.' ] }
       ],
       education: [
         'OPET University Center — Bachelor’s Degree in Information Technology Management',
@@ -391,25 +316,39 @@
       languages: ['Portuguese: Native', 'English: Professional working proficiency', 'Dutch: A1 (currently studying)']
     };
 
-    const keywords = {
-      'Microsoft 365': ['microsoft 365','office 365','o365','exchange online','teams','sharepoint','onedrive'],
-      'Active Directory': ['active directory','ad','azure ad','entra id','group policy'],
-      'Windows Support': ['windows','desktop support','laptop','workstation','imaging'],
-      'Service Desk': ['service desk','help desk','ticket','incident','sla','support desk'],
-      'Networking': ['network','tcp/ip','vpn','switch','router','wifi'],
-      'Hardware Support': ['hardware','printer','device','peripheral','break fix'],
-      'Security & Access': ['access management','iam','mfa','security','permissions'],
-      'ITIL': ['itil','incident management','problem management','change management'],
-      'Onboarding': ['onboarding','offboarding','new starter','user setup'],
-      'Cloud & SaaS': ['saas','cloud','google workspace','intune','jamf']
+    const requirementGroups = {
+      technical: {
+        'Microsoft 365': ['microsoft 365','office 365','o365','exchange online','teams','sharepoint','onedrive'],
+        'Windows': ['windows','desktop support','workstation','laptop'],
+        'Active Directory': ['active directory','azure ad','entra id','group policy'],
+        'Networking': ['network','netwerken','tcp/ip','vpn','switch','router','wifi','lan'],
+        'Hardware': ['hardware','printer','device','devices','peripheral'],
+        'ITIL': ['itil','incident management','problem management','change management'],
+        'Service Desk': ['service desk','servicedesk','help desk','ticket','incident','sla'],
+        'Onboarding': ['onboarding','offboarding','new starter','user setup'],
+        'SQL': ['sql','database','databases'],
+        'Citrix': ['citrix']
+      },
+      soft: {
+        'Empathy': ['empathie','empathy','persoonlijke aandacht','personal attention'],
+        'Calm under pressure': ['rust','remains calm','calm','druk','pressure'],
+        'Communication': ['communiceert duidelijk','communication','clearly','uitleggen','explains'],
+        'Teamwork': ['samenwerking','teamwork','collaboration','collega'],
+        'Quality and structure': ['kwaliteit','structure','structuur','reliable','betrouwbare'],
+        'Customer focus': ['gebruikers','customers','klanten','heard','gehoord']
+      }
     };
 
     const jobText = document.getElementById('jobText');
     const charCount = document.getElementById('charCount');
     const analyzeBtn = document.getElementById('analyzeBtn');
+    const gptBtn = document.getElementById('gptBtn');
     const downloadBtn = document.getElementById('downloadBtn');
     const previewBox = document.getElementById('previewBox');
+    const analysisBox = document.getElementById('analysisBox');
     const statusBox = document.getElementById('statusBox');
+    const apiEndpointInput = document.getElementById('apiEndpoint');
+    const targetRoleInput = document.getElementById('targetRole');
     let latestCV = null;
 
     function updateCount() {
@@ -418,76 +357,120 @@
       charCount.className = 'counter' + (len > 19000 ? ' warning' : '');
     }
 
-    function scoreKeywords(text) {
-      const found = [];
+    function detectLanguage(text) {
       const lower = text.toLowerCase();
-      Object.entries(keywords).forEach(([label, terms]) => {
-        if (terms.some(term => lower.includes(term))) found.push(label);
-      });
-      return found;
+      const dutchHits = ['vacature','werkdagen','ervaring','opleiding','dienstverband','arbeidsvoorwaarden','samenwerking','kwaliteit'];
+      const count = dutchHits.filter(w => lower.includes(w)).length;
+      return count >= 2 ? 'nl' : 'en';
     }
 
-    function extractTopPhrases(text) {
+    function collectMatches(text) {
       const lower = text.toLowerCase();
-      const phrases = [];
-      ['customer support','end-user support','technical support','microsoft 365','active directory','windows','it support','service desk','incident management','onboarding','troubleshooting','ticketing','hardware support','software support','sql','reporting','process improvement','communication','teamwork'].forEach(p => {
-        if (lower.includes(p)) phrases.push(p);
-      });
-      return [...new Set(phrases)].slice(0, 10);
+      const out = { technical: [], soft: [] };
+      Object.entries(requirementGroups.technical).forEach(([name, terms]) => { if (terms.some(t => lower.includes(t))) out.technical.push(name); });
+      Object.entries(requirementGroups.soft).forEach(([name, terms]) => { if (terms.some(t => lower.includes(t))) out.soft.push(name); });
+      return out;
     }
 
-    function tailorCV(jobDescription) {
-      const matchedAreas = scoreKeywords(jobDescription);
-      const phrases = extractTopPhrases(jobDescription);
+    function inferRole(text, targetRole) {
+      const lower = text.toLowerCase();
+      if (targetRole) return targetRole.trim();
+      if (lower.includes('servicedeskmedewerker')) return 'Servicedeskmedewerker / IT Support Professional';
+      if (lower.includes('service desk')) return 'Service Desk / IT Support Professional';
+      if (lower.includes('workplace')) return 'Workplace IT Support Professional';
+      if (lower.includes('desktop support')) return 'Desktop Support / IT Support Professional';
+      return 'IT Support Professional';
+    }
+
+    function reorderBullets(job, lowerText, matches) {
+      const scored = job.bullets.map(b => {
+        let score = 0;
+        const low = b.toLowerCase();
+        matches.technical.forEach(m => { if (low.includes(m.toLowerCase().split(' ')[0])) score += 3; });
+        if (/support|issue|troubleshooting|user|account|system|process|onboarding|communication|team/i.test(b)) score += 2;
+        if (lowerText.includes('servicedesk') && /support|incident|user/i.test(b)) score += 3;
+        if (lowerText.includes('windows') && /desktop|hardware|software/i.test(b)) score += 2;
+        return { b, score };
+      }).sort((a,b) => b.score - a.score);
+      return scored.map(x => x.b).slice(0, 6);
+    }
+
+    function buildAnalysis(text, matches) {
+      const lower = text.toLowerCase();
+      const strengths = [];
+      const gaps = [];
+      const notes = [];
+
+      if (matches.technical.includes('Service Desk')) strengths.push('Good fit for service desk / user support responsibilities.');
+      if (matches.technical.includes('Microsoft 365')) strengths.push('Strong relevance to Microsoft 365 support needs.');
+      if (matches.technical.includes('Windows')) strengths.push('Good alignment with Windows-based support environments.');
+      if (matches.soft.includes('Communication')) strengths.push('Communication is explicitly valued, which matches your profile well.');
+      if (matches.soft.includes('Teamwork')) strengths.push('The role values collaboration, which aligns with your operational background.');
+      if (matches.soft.includes('Empathy')) strengths.push('The vacancy values empathy and user care, and this should be highlighted strongly in the CV.');
+
+      if (lower.includes('mbo4')) gaps.push('The vacancy explicitly asks for mbo4 ICT education, so the CV should position your degree clearly and avoid ambiguity.');
+      if (lower.includes('ccna')) gaps.push('Cisco certification is desirable. Mention it only if you truly have it; otherwise do not invent it.');
+      if (lower.includes('mcp') || lower.includes('mcse')) gaps.push('Microsoft certification is a plus. Keep only real certifications in the CV.');
+      if (lower.includes('2 jaar') || lower.includes('2 years')) strengths.push('You have more than enough support-related experience to satisfy the minimum experience requirement.');
+      if (matches.soft.includes('Calm under pressure')) notes.push('The summary should emphasize calmness, reassurance, and confidence under pressure.');
+      if (matches.soft.includes('Quality and structure')) notes.push('The summary and experience should emphasize structure, reliability, and quality of service.');
+
+      return { strengths, gaps, notes };
+    }
+
+    function tailorCVLocal(jobDescription, targetRole = '') {
       const lower = jobDescription.toLowerCase();
+      const lang = detectLanguage(jobDescription);
+      const matches = collectMatches(jobDescription);
+      const role = inferRole(jobDescription, targetRole);
+      const analysis = buildAnalysis(jobDescription, matches);
+      const coreSkills = [...new Set([...matches.technical, 'End-User Support', 'Problem Solving', 'Communication', 'Team Collaboration'])].slice(0, 12);
 
-      const focusTitle = lower.includes('service desk') ? 'Service Desk / IT Support Professional' :
-                         lower.includes('workplace') ? 'Workplace IT Support Professional' :
-                         lower.includes('desktop support') ? 'Desktop Support / IT Support Professional' :
-                         'IT Support Professional';
-
-      const tailoredSummary = [
-        `IT support professional with hands-on experience in end-user support, troubleshooting, workstation setup, onboarding, Microsoft 365, Active Directory, and daily IT operations, aligned to roles focused on ${phrases.slice(0,3).join(', ') || 'IT support excellence'}.`,
-        `Brings a practical, service-oriented approach, strong communication, and operational discipline to support users, maintain business continuity, and contribute to efficient service delivery.`
-      ];
-
-      const tailoredSkills = [...new Set([...baseCV.skills, ...matchedAreas])];
-
-      const tailoredExperience = baseCV.experience.map(item => ({
-        ...item,
-        bullets: item.bullets.filter(b => {
-          if (item.role.includes('Operations Manager')) {
-            return /system|erp|pos|issue|onboarding|training|process|support|operations/i.test(b);
-          }
-          if (item.role.includes('IT Analyst')) {
-            return /support|sql|report|dashboard|system|workflow|data/i.test(b);
-          }
-          return true;
-        })
-      }));
-
-      if (matchedAreas.includes('Service Desk')) {
-        tailoredExperience[2].bullets.unshift('Delivered user-focused support in service-oriented environments, handling incidents and troubleshooting requests efficiently.');
+      const summary = [];
+      if (lang === 'nl') {
+        summary.push(`IT support professional met ruime ervaring in end-user support, troubleshooting, werkplekbeheer, onboarding, Microsoft 365, Active Directory en dagelijkse IT-ondersteuning, gericht op rollen zoals ${role}.`);
+        summary.push('Bekend om een rustige, oplossingsgerichte en servicegerichte aanpak, met duidelijke communicatie richting gebruikers en een sterke focus op betrouwbare dienstverlening.');
+        if (matches.soft.includes('Empathy')) summary.push('Legt nadruk op persoonlijke aandacht, empathie en het geruststellen van gebruikers wanneer er storingen of urgente IT-problemen zijn.');
+        if (matches.soft.includes('Quality and structure')) summary.push('Werkt graag in een omgeving waar kwaliteit, structuur en samenwerking centraal staan.');
+      } else {
+        summary.push(`IT support professional with strong experience in end-user support, troubleshooting, workplace setup, onboarding, Microsoft 365, Active Directory, and daily IT operations, aligned to roles such as ${role}.`);
+        summary.push('Known for a calm, solution-oriented, and service-focused approach, with clear communication and a strong commitment to reliable IT support.');
+        if (matches.soft.includes('Empathy')) summary.push('Brings empathy, reassurance, and personal attention when supporting users through technical issues and urgent requests.');
+        if (matches.soft.includes('Quality and structure')) summary.push('Works especially well in environments that value quality, structure, and teamwork.');
       }
-      if (matchedAreas.includes('Microsoft 365')) {
-        tailoredExperience[2].bullets.unshift('Supported user environments involving Microsoft services, account access, and day-to-day workplace technology needs.');
-      }
-      if (matchedAreas.includes('Onboarding')) {
-        tailoredExperience[0].bullets.unshift('Supported onboarding activities, user setup, and process guidance for new team members.');
-      }
-      if (matchedAreas.includes('ITIL')) {
-        tailoredSummary.push('Comfortable with structured support environments and an ITIL-style mindset for incident handling, prioritization, and continuous improvement.');
-      }
+
+      const exp = baseCV.experience.map(job => ({ ...job, bullets: reorderBullets(job, lower, matches) }));
+      if (matches.technical.includes('Service Desk')) exp[2].bullets.unshift(lang === 'nl' ? 'Ondersteunde gebruikers in servicegerichte omgevingen en handelde incidenten en storingen zorgvuldig en efficiënt af.' : 'Supported users in service-oriented environments and handled incidents and troubleshooting requests carefully and efficiently.');
+      if (matches.technical.includes('Microsoft 365')) exp[2].bullets.unshift(lang === 'nl' ? 'Ondersteunde gebruikersomgevingen met Microsoft-services, accounttoegang en dagelijkse werkplekbehoeften.' : 'Supported workplace environments involving Microsoft services, account access, and daily user technology needs.');
+      if (matches.soft.includes('Empathy')) exp[0].bullets.unshift(lang === 'nl' ? 'Trad op als eerste aanspreekpunt bij operationele en systeemgerelateerde issues, met aandacht voor duidelijke communicatie en gebruikersvertrouwen.' : 'Acted as a first point of contact for operational and system-related issues, combining clear communication with user reassurance.');
+
+      const coverLetter = lang === 'nl'
+        ? `Geachte recruiter,\n\nMet interesse solliciteer ik op de functie van ${role}. Mijn achtergrond in IT support, end-user support, Microsoft 365, Active Directory, hardware/software troubleshooting en dagelijkse operationele ondersteuning sluit goed aan op de gevraagde werkzaamheden. Wat mij extra aanspreekt in deze vacature is de nadruk op kwaliteit, samenwerking, persoonlijke aandacht en een rustige manier van ondersteunen.\n\nIn eerdere functies ondersteunde ik gebruikers, beheerde ik accounts en toegangen, loste ik storingen op en hielp ik teams om door te kunnen werken in dynamische omgevingen. Ik geloof in duidelijke communicatie, betrokkenheid en het bieden van vertrouwen aan gebruikers op momenten dat iets niet werkt.\n\nMet vriendelijke groet,\nRafael Lafraia`
+        : `Dear Recruiter,\n\nI am very interested in the ${role} position. My background in IT support, end-user support, Microsoft 365, Active Directory, hardware/software troubleshooting, and day-to-day operational support aligns well with the responsibilities in this role. I am especially drawn to the emphasis on quality, teamwork, personal attention, and calm user support.\n\nIn previous roles, I supported users, managed access and accounts, resolved technical issues, and helped teams continue working effectively in dynamic environments. I believe in clear communication, genuine user care, and giving people confidence when technology is not working as expected.\n\nKind regards,\nRafael Lafraia`;
 
       return {
         ...baseCV,
-        title: focusTitle,
-        summary: tailoredSummary,
-        skills: tailoredSkills,
-        experience: tailoredExperience,
-        matchedAreas,
-        phrases
+        title: role,
+        summary,
+        skills: coreSkills,
+        experience: exp,
+        analysis,
+        coverLetter,
+        lang
       };
+    }
+
+    function renderAnalysis(cv) {
+      const lines = [];
+      lines.push('Strengths');
+      (cv.analysis.strengths.length ? cv.analysis.strengths : ['General IT Support fit identified.']).forEach(x => lines.push('• ' + x));
+      lines.push('');
+      lines.push('Possible gaps / cautions');
+      (cv.analysis.gaps.length ? cv.analysis.gaps : ['No major gap detected from the pasted text.']).forEach(x => lines.push('• ' + x));
+      lines.push('');
+      lines.push('Adaptation notes');
+      (cv.analysis.notes.length ? cv.analysis.notes : ['The CV was focused on the strongest matching requirements.']).forEach(x => lines.push('• ' + x));
+      analysisBox.textContent = lines.join('\n');
     }
 
     function renderPreview(cv) {
@@ -499,10 +482,7 @@
         'PROFILE',
         ...cv.summary,
         '',
-        'MATCHED AREAS',
-        ...(cv.matchedAreas.length ? cv.matchedAreas : ['General IT Support fit']),
-        '',
-        'SKILLS',
+        'KEY SKILLS',
         cv.skills.join(' | '),
         '',
         'EXPERIENCE',
@@ -511,7 +491,10 @@
         ...cv.education,
         '',
         'LANGUAGES',
-        ...cv.languages
+        ...cv.languages,
+        '',
+        'SHORT COVER LETTER',
+        cv.coverLetter
       ].join('\n');
       previewBox.textContent = text;
     }
@@ -523,7 +506,6 @@
       const height = doc.internal.pageSize.getHeight();
       const margin = 42;
       let y = 48;
-
       function addWrapped(text, size = 11, color = [20,20,20], weight = 'normal', gap = 8) {
         doc.setFont('helvetica', weight);
         doc.setFontSize(size);
@@ -536,17 +518,13 @@
         });
         y += gap;
       }
-
       addWrapped(cv.name, 22, [10,16,32], 'bold', 2);
       addWrapped(cv.title, 13, [70,90,130], 'bold', 4);
       addWrapped(`${cv.location}  |  ${cv.email}  |  ${cv.phone}`, 10, [80,80,80], 'normal', 14);
-
       addWrapped('PROFILE', 12, [10,16,32], 'bold', 2);
       cv.summary.forEach(p => addWrapped(p, 11, [30,30,30], 'normal', 2));
-
       addWrapped('KEY SKILLS', 12, [10,16,32], 'bold', 2);
       addWrapped(cv.skills.join(' • '), 10.5, [30,30,30], 'normal', 12);
-
       addWrapped('PROFESSIONAL EXPERIENCE', 12, [10,16,32], 'bold', 2);
       cv.experience.forEach(job => {
         addWrapped(job.role, 11.5, [20,20,20], 'bold', 0);
@@ -554,34 +532,66 @@
         job.bullets.forEach(b => addWrapped('• ' + b, 10.5, [30,30,30], 'normal', 1));
         y += 6;
       });
-
       addWrapped('EDUCATION & CERTIFICATIONS', 12, [10,16,32], 'bold', 2);
       cv.education.forEach(item => addWrapped('• ' + item, 10.5, [30,30,30], 'normal', 1));
       y += 6;
       addWrapped('LANGUAGES', 12, [10,16,32], 'bold', 2);
       cv.languages.forEach(item => addWrapped('• ' + item, 10.5, [30,30,30], 'normal', 1));
-
+      doc.addPage();
+      y = 48;
+      addWrapped('SHORT COVER LETTER', 12, [10,16,32], 'bold', 8);
+      cv.coverLetter.split('\n').forEach(line => addWrapped(line, 11, [30,30,30], 'normal', 2));
       doc.save('Rafael_Lafraia_Tailored_CV.pdf');
     }
 
-    analyzeBtn.addEventListener('click', () => {
+    async function callGptEndpoint() {
+      const endpoint = apiEndpointInput.value.trim();
       const text = jobText.value.trim();
+      const targetRole = targetRoleInput.value.trim();
+      if (!endpoint) {
+        statusBox.textContent = 'Please add your GPT endpoint URL first.';
+        return;
+      }
       if (!text) {
         statusBox.textContent = 'Please paste a job description first.';
         return;
       }
-      const cv = tailorCV(text);
+      statusBox.textContent = 'Calling your GPT endpoint...';
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ baseCV, jobDescription: text, targetRole })
+        });
+        if (!response.ok) throw new Error('Endpoint returned an error.');
+        const cv = await response.json();
+        latestCV = cv;
+        renderAnalysis(cv);
+        renderPreview(cv);
+        downloadBtn.disabled = false;
+        statusBox.textContent = 'GPT tailoring complete.';
+      } catch (err) {
+        statusBox.textContent = 'Could not use the GPT endpoint. Check the endpoint URL and deployment.';
+      }
+    }
+
+    analyzeBtn.addEventListener('click', () => {
+      const text = jobText.value.trim();
+      const targetRole = targetRoleInput.value.trim();
+      if (!text) {
+        statusBox.textContent = 'Please paste a job description first.';
+        return;
+      }
+      const cv = tailorCVLocal(text, targetRole);
       latestCV = cv;
+      renderAnalysis(cv);
       renderPreview(cv);
       downloadBtn.disabled = false;
-      statusBox.textContent = `Done. CV tailored based on detected focus areas: ${cv.matchedAreas.join(', ') || 'general IT support'}.`;
+      statusBox.textContent = 'Smart local tailoring complete.';
     });
 
-    downloadBtn.addEventListener('click', () => {
-      if (!latestCV) return;
-      downloadPDF(latestCV);
-    });
-
+    gptBtn.addEventListener('click', callGptEndpoint);
+    downloadBtn.addEventListener('click', () => { if (latestCV) downloadPDF(latestCV); });
     jobText.addEventListener('input', updateCount);
     updateCount();
   </script>
