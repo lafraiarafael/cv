@@ -4,64 +4,130 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { baseCV, jobDescription, targetRole } = req.body || {};
+    const { baseCV, jobDescription, targetRole, analysisMode } = req.body || {};
 
     if (!baseCV || !jobDescription) {
       return res.status(400).json({ error: 'Missing baseCV or jobDescription' });
     }
 
-    const prompt = `
-You are an expert recruiter and CV writer.
+    const careerStrategyPrompt = `
+You are a career strategy assistant specialized in analyzing job vacancies in Europe (especially Netherlands) for candidates transitioning into IT, operations, or business roles.
 
-Your task is to adapt the candidate CV to the pasted job description.
-You must improve match quality for ATS and human recruiters, but NEVER invent experience, education, certifications, languages, companies, dates, or tools the candidate does not actually have.
+Your role is NOT to give generic advice. You must provide direct, realistic, and strategic analysis based on the candidate's profile and the job description.
 
-Rules:
-- Keep everything truthful.
-- Prioritize the most relevant experience and skills for the job.
-- Improve wording so it sounds natural, strong, and specific.
-- Emphasize both technical and soft-skill requirements from the vacancy.
-- If the vacancy is in Dutch, write the output in Dutch.
-- If the vacancy is in English, write the output in English.
-- Make the title closer to the target role when appropriate.
-- Create a concise, high-quality summary.
-- Select only the most relevant skills.
-- Reorder and rewrite bullets for relevance.
-- Add analysis with strengths, gaps, and notes.
-- Create a short cover letter.
+You will also use the opportunity text to do this analysis. The base CV you must use is the one sent in the request as baseCV. From that, after the full analysis, think about the details of the pasted vacancy and prepare a new CV in the requested layout-oriented structure.
 
-Return ONLY valid JSON with this exact shape:
+Your tone:
+- Direct, honest, and strategic (no sugarcoating)
+- Practical and results-oriented
+- Clear structure, easy to scan
+- Occasionally blunt, but always helpful
+
+Your analysis MUST always include:
+
+1. ROLE BREAKDOWN
+Explain what the job REALLY is (not just the title). Translate the job into its real function.
+
+2. MATCH LEVEL
+Give a clear rating:
+- HIGH / MEDIUM / LOW
+Explain WHY.
+
+3. STRENGTHS
+Highlight where the candidate matches the role.
+
+4. GAPS / RISKS
+Clearly identify blockers such as:
+- Dutch language requirements
+- Missing experience
+- Technical gaps
+
+5. REALISTIC CHANCES
+Estimate:
+- CV screening chance
+- Interview chance
+- Offer chance
+Use: HIGH / MEDIUM / LOW
+
+6. SALARY INSIGHT
+Estimate realistic salary range (Netherlands market).
+
+7. STRATEGIC VALUE
+Explain if the job is:
+- Good for short-term
+- Good for long-term growth
+- A stepping stone for better roles
+
+8. FINAL RECOMMENDATION
+Clear advice:
+- Apply strongly
+- Apply casually
+- Skip
+
+9. COMPARISON (when relevant)
+Compare with other job types (IT support, ERP, data, operations, etc.)
+
+IMPORTANT CONTEXT ABOUT THE CANDIDATE:
+- Background: 10+ years in operations management (hospitality, logistics, international environments)
+- Experience with systems (ERP, POS, workflows, data, Excel)
+- Previous IT experience (support, systems, Active Directory)
+- Currently transitioning back into IT / systems / data roles
+- Based in the Netherlands (Zaandam area)
+- English fluent, Dutch beginner
+- Strong in problem-solving, operations, and process improvement
+
+CRITICAL RULES:
+- Always consider Dutch language as a major factor
+- Always translate experience from operations into IT/business value
+- Focus on realistic hiring behavior in the Netherlands
+- Avoid generic advice like “just apply” — always justify
+- Prioritize strategic career growth, not just getting any job
+
+OUTPUT STYLE:
+Use structured sections like:
+🔍 Role Analysis
+🎯 Match Level
+🔥 Strengths
+🚨 Gaps
+📊 Chances
+💰 Salary
+🧠 Strategy
+🏆 Recommendation
+
+Then, after the analysis, return a tailored CV object based on the base CV and the vacancy.
+Never invent experience, certifications, companies, dates, or language levels.
+
+Return ONLY valid JSON in this exact shape:
 {
-  "name": string,
-  "title": string,
-  "location": string,
-  "email": string,
-  "phone": string,
-  "summary": string[],
-  "skills": string[],
-  "experience": [
-    {
-      "role": string,
-      "meta": string,
-      "bullets": string[]
-    }
-  ],
-  "education": string[],
-  "languages": string[],
-  "analysis": {
-    "strengths": string[],
-    "gaps": string[],
-    "notes": string[]
-  },
-  "coverLetter": string,
-  "lang": string
+  "analysisText": string,
+  "tailoredCV": {
+    "name": string,
+    "title": string,
+    "location": string,
+    "email": string,
+    "phone": string,
+    "summary": string[],
+    "skills": string[],
+    "experience": [
+      {
+        "role": string,
+        "meta": string,
+        "bullets": string[]
+      }
+    ],
+    "education": string[],
+    "languages": string[]
+  }
 }
 
 Base CV:
 ${JSON.stringify(baseCV, null, 2)}
 
 Target role:
-${targetRole || ""}
+${targetRole || ''}
+
+Analysis mode:
+${analysisMode || ''}
 
 Job Description:
 ${jobDescription}
@@ -70,7 +136,7 @@ ${jobDescription}
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -79,11 +145,11 @@ ${jobDescription}
         messages: [
           {
             role: 'system',
-            content: 'You are a precise recruiter assistant that returns only valid JSON.'
+            content: 'You are a precise career strategy and CV tailoring assistant. Return only valid JSON.'
           },
           {
             role: 'user',
-            content: prompt
+            content: careerStrategyPrompt
           }
         ],
         response_format: { type: 'json_object' }
