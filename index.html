@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rafael Lafraia | IT Support Professional in the Netherlands</title>
+  <meta name="description" content="Professional profile of Rafael Lafraia, IT Support professional based in the Netherlands, with experience in end-user support, Microsoft 365, Active Directory, troubleshooting, onboarding, and operations." />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #171f3d;
+      --text: #eef2ff;
+      --muted: #b7c0e0;
+      --accent: #78a6ff;
+      --accent-2: #9ee6c3;
+      --line: rgba(255,255,255,0.1);
+      --shadow: 0 12px 30px rgba(0,0,0,0.28);
+      --radius: 18px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(120,166,255,0.15), transparent 30%),
+        radial-gradient(circle at top right, rgba(158,230,195,0.12), transparent 25%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      width: min(92%, var(--max));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+      background: rgba(11,16,32,0.72);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0;
+    }
+
+    .brand { font-weight: 700; letter-spacing: 0.2px; }
+    .menu { display: flex; gap: 18px; flex-wrap: wrap; }
+    .menu a { color: var(--muted); font-size: 0.95rem; }
+
+    .hero { padding: 72px 0 42px; }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-card, .side-card, .section-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card { padding: 36px; }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 12px;
+      border: 1px solid rgba(120,166,255,0.28);
+      background: rgba(120,166,255,0.1);
+      color: #d8e5ff;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 4vw, 4rem);
+      line-height: 1.05;
+    }
+
+    .subtitle {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 720px;
+      margin-bottom: 22px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: transparent;
+      font-weight: 600;
+    }
+
+    .btn.primary {
+      background: linear-gradient(90deg, var(--accent), #90b7ff);
+      color: #081120;
+      border: none;
+    }
+
+    .side-card {
+      padding: 28px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .info-block h3 {
+      margin: 0 0 8px;
+      font-size: 0.95rem;
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .info-block p, .info-block li { margin: 0; color: var(--muted); }
+    .info-block ul { margin: 0; padding-left: 18px; }
+
+    .sections {
+      display: grid;
+      gap: 24px;
+      padding: 8px 0 64px;
+    }
+
+    .section-card { padding: 30px; }
+    .section-title { margin: 0 0 18px; font-size: 1.6rem; }
+    .lead { color: var(--muted); margin: 0; }
+
+    .timeline {
+      display: grid;
+      gap: 22px;
+      margin-top: 8px;
+    }
+
+    .job {
+      padding: 20px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .job h3 { margin: 0 0 6px; font-size: 1.15rem; }
+    .job .meta { color: var(--accent-2); font-size: 0.95rem; margin-bottom: 12px; }
+    .job ul { margin: 0; padding-left: 18px; color: var(--muted); }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(120,166,255,0.1);
+      border: 1px solid rgba(120,166,255,0.2);
+      color: #d8e5ff;
+      font-size: 0.95rem;
+    }
+
+    .list-clean { margin: 0; padding-left: 18px; color: var(--muted); }
+    .footer { padding: 28px 0 50px; color: var(--muted); text-align: center; }
+
+    @media (max-width: 900px) {
+      .hero-grid, .grid-2 { grid-template-columns: 1fr; }
+      .hero { padding-top: 40px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">Rafael Lafraia</div>
+      <div class="menu">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#languages">Languages</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div class="hero-card">
+        <div class="eyebrow">Based in Zaandam, Netherlands</div>
+        <h1>IT Support Professional focused on reliable end-user support and daily IT operations.</h1>
+        <p class="subtitle">
+          I am an IT support professional with experience in end-user support, systems troubleshooting,
+          workstation setup, onboarding, Microsoft 365, Active Directory, hardware and software support,
+          and process-oriented operations in fast-paced environments.
+        </p>
+        <p class="subtitle">
+          I bring a practical, solution-oriented mindset, clear communication with users, and strong operational
+          discipline to help teams stay productive and supported.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#contact">Get in touch</a>
+          <a class="btn" href="#experience">View experience</a>
+        </div>
+      </div>
+
+      <aside class="side-card">
+        <div class="info-block">
+          <h3>Current Goal</h3>
+          <p>IT Support / Service Desk / Workplace Support opportunities in the Netherlands.</p>
+        </div>
+
+        <div class="info-block">
+          <h3>Location</h3>
+          <p>Zaandam, Netherlands</p>
+        </div>
+
+        <div class="info-block">
+          <h3>Core Stack</h3>
+          <ul>
+            <li>Windows Environment</li>
+            <li>Microsoft 365</li>
+            <li>Active Directory</li>
+            <li>Hardware & Software Troubleshooting</li>
+            <li>ERP / POS / SQL Support</li>
+          </ul>
+        </div>
+
+        <div class="info-block">
+          <h3>Languages</h3>
+          <p>English, Portuguese, Dutch (A1 - studying)</p>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="container sections">
+    <section id="about" class="section-card">
+      <h2 class="section-title">About Me</h2>
+      <p class="lead">
+        I have experience supporting users, setting up workstations, managing IT assets, and helping maintain
+        smooth day-to-day IT operations. My background combines technical support with strong operational awareness,
+        which allows me to work well in dynamic environments where responsiveness, organization, and reliability matter.
+      </p>
+      <br />
+      <p class="lead">
+        In addition to hands-on IT support, I have worked in roles involving reporting, process improvement,
+        onboarding, coordination, and systems-related problem solving. This combination helps me understand both
+        user needs and the operational impact of technology.
+      </p>
+    </section>
+
+    <section id="experience" class="section-card">
+      <h2 class="section-title">Professional Experience</h2>
+      <div class="timeline">
+        <article class="job">
+          <h3>Operations Manager</h3>
+          <div class="meta">2018 – 2026 | Brazil / Netherlands</div>
+          <ul>
+            <li>Led operations in fast-paced environments, ensuring continuity, performance, and quick resolution of operational and system-related issues.</li>
+            <li>Managed team operations, logistics, and workflow execution for international trade fairs across Asia, Europe, the Middle East, and Brazil.</li>
+            <li>Managed the full kitchen operation of a large restaurant in Amsterdam for one year, overseeing team performance, workflows, and service execution.</li>
+            <li>Worked extensively with ERP systems, POS platforms, and spreadsheets for inventory, orders, and operational workflows.</li>
+            <li>Acted as the first point of contact for system and process-related issues, identifying root causes and implementing practical solutions.</li>
+            <li>Led onboarding and training of team members, including system usage and process standardization.</li>
+            <li>Implemented process improvements to increase efficiency, scalability, and operational reliability.</li>
+          </ul>
+        </article>
+
+        <article class="job">
+          <h3>IT Analyst – Data & Systems | MultiBR Commercial Group</h3>
+          <div class="meta">2015 – 2018</div>
+          <ul>
+            <li>Supported business operations through data analysis, reporting, and system optimization.</li>
+            <li>Developed SQL queries for data extraction and reporting.</li>
+            <li>Built dashboards and reports to support decision-making.</li>
+            <li>Maintained data accuracy and system reliability across platforms.</li>
+            <li>Collaborated with teams to improve workflows and processes.</li>
+          </ul>
+        </article>
+
+        <article class="job">
+          <h3>Junior IT Support | Fundação Sanepar</h3>
+          <div class="meta">2009 – 2012</div>
+          <ul>
+            <li>Provided end-user support for desktops, servers, and applications.</li>
+            <li>Managed user accounts and access control in Active Directory environments.</li>
+            <li>Performed hardware and software troubleshooting.</li>
+            <li>Supported Citrix virtual environments.</li>
+            <li>Assisted with system deployment and issue resolution.</li>
+          </ul>
+        </article>
+
+        <article class="job">
+          <h3>IT Trainee | Sanepar – State-Owned Water Company – Brazil</h3>
+          <div class="meta">2008 – 2009</div>
+          <ul>
+            <li>Provided hardware and software support for end users.</li>
+            <li>Installed and maintained desktops and servers.</li>
+            <li>Worked in an enterprise environment with a network of over 2,000 computers across the state.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" class="section-card">
+      <h2 class="section-title">Skills</h2>
+      <div class="tags">
+        <span class="tag">Windows Environment</span>
+        <span class="tag">Microsoft 365</span>
+        <span class="tag">Active Directory</span>
+        <span class="tag">User Management</span>
+        <span class="tag">Hardware & Software Troubleshooting</span>
+        <span class="tag">IT Asset Management</span>
+        <span class="tag">Device Setup & Configuration</span>
+        <span class="tag">End-User Support</span>
+        <span class="tag">ERP Systems</span>
+        <span class="tag">POS Systems</span>
+        <span class="tag">SQL & Databases</span>
+        <span class="tag">User Onboarding</span>
+        <span class="tag">Problem Solving</span>
+        <span class="tag">ITIL Mindset</span>
+        <span class="tag">Communication</span>
+        <span class="tag">Team Collaboration</span>
+        <span class="tag">Process Improvement</span>
+      </div>
+    </section>
+
+    <div class="grid-2">
+      <section id="education" class="section-card">
+        <h2 class="section-title">Education & Certifications</h2>
+        <ul class="list-clean">
+          <li><strong>OPET University Center</strong> — Bachelor’s Degree in Information Technology Management</li>
+          <li><strong>Google Coursera</strong> — Data Analysis Certificate</li>
+          <li><strong>Sofhar Microsoft School</strong> — Windows Server Implementation, Maintenance and Management</li>
+          <li><strong>Cambridge Western Academy</strong> — English IELTS Training & Certification</li>
+        </ul>
+      </section>
+
+      <section id="languages" class="section-card">
+        <h2 class="section-title">Languages</h2>
+        <ul class="list-clean">
+          <li><strong>Portuguese:</strong> Native</li>
+          <li><strong>English:</strong> Professional working proficiency</li>
+          <li><strong>Dutch:</strong> A1 (currently studying)</li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="section-card">
+      <h2 class="section-title">What I Offer</h2>
+      <ul class="list-clean">
+        <li>Reliable support for end users in office and operational environments.</li>
+        <li>Hands-on troubleshooting for devices, accounts, software, and workplace systems.</li>
+        <li>Structured onboarding and workstation setup for new employees.</li>
+        <li>Clear communication with users and teams across day-to-day support activities.</li>
+        <li>A practical mindset that combines technical support with operational efficiency.</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="section-card">
+      <h2 class="section-title">Contact</h2>
+      <p class="lead">
+        Interested in IT Support, Service Desk, Workplace Support, or Operations-related technology roles in the Netherlands.
+      </p>
+      <br />
+      <p class="lead">
+        Email: <a href="mailto:rafael.lafraia@live.com">rafael.lafraia@live.com</a><br />
+        Phone: <a href="tel:+31615206788">+31 615206788</a><br />
+        Location: Zaandam, Netherlands
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer container">
+    <p>© Rafael Lafraia — Professional CV Website</p>
+  </footer>
+</body>
+</html>
